@@ -12,6 +12,26 @@
     "use_git_revision": "yes", 
     "version": "master"
   }, 
+  "deps": {
+    "compiler": {
+      "local": "yes", 
+      "name": "C++ compiler", 
+      "sort": 0, 
+      "tags": "compiler,lang-cpp"
+    },
+    "libjpeg": {
+      "local": "yes",
+      "name": "libjpeg",
+      "sort": 1,
+      "tags": "lib,libjpeg,jpeg"
+    },
+    "xopenme": {
+      "local": "yes",
+      "name": "xOpenME library",
+      "sort": 2,
+      "tags": "lib,xopenme"
+    } 
+  },
   "end_full_path": {
     "android": "src/tensorflow/tensorflow.bzl", 
     "linux": "src/tensorflow/tensorflow.bzl", 
@@ -25,6 +45,10 @@
     "lib", 
     "tensorflow-src"
   ], 
+  "use_preprocess_scripts_from_another_entry": {
+    "data_uoa": "fd44428fbc77f77f", 
+    "module_uoa": "84e27ad9dd12e734"
+  }, 
   "use_scripts_from_another_entry": {
     "data_uoa": "cd9ccc74060b3d18", 
     "module_uoa": "script"
