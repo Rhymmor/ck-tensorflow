@@ -72,4 +72,35 @@ def setup(i):
 
     env[ep]=pi
 
+    makefile_env = ep + "_MAKEFILE_DIR"
+    makefile_path = p1 + '/contrib/makefile'
+    env[makefile_env] = makefile_path
+
+    makefile_downl_env = makefile_env + '_DOWNLOADS'
+    makefile_downl_path = makefile_path + '/downloads'
+    env[makefile_downl_env] = makefile_downl_path
+    env[makefile_downl_env + '_EIGEN'] = makefile_downl_path + '/eigen'
+    env[makefile_downl_env + '_GEMMLOWP'] = makefile_downl_path + '/gemmlowp'
+
+    makefile_gen_env = makefile_env + '_GEN'
+    makefile_gen_path = makefile_path + '/gen'
+    env[makefile_gen_env] = makefile_gen_path
+    env[makefile_gen_env + '_PROTO'] = makefile_gen_path + '/proto'
+    env[makefile_gen_env + '_PROTOTEXT'] = makefile_gen_path + '/proto_text'
+    env[makefile_gen_env + '_PROTOTEXT'] = makefile_gen_path + '/proto_text'
+    env[makefile_gen_env + '_PROTOBUF_HOST_INCUDE'] = makefile_gen_path + '/protobuf-host/include'
+    env[makefile_gen_env + '_PROTOBUF_HOST_INCUDE'] = makefile_gen_path + '/protobuf-host/include'
+    env[makefile_gen_env + '_TOOLS'] = makefile_gen_path + '/obj/tensorflow/tools/benchmark'
+    env[makefile_gen_env + '_LIB'] = makefile_gen_path + '/lib'
+
+    cus['path_lib']=p1 + '/contrib/makefile/gen/protobuf/lib'
+
+    r = ck.access({'action': 'lib_path_export_script', 
+                   'module_uoa': 'os', 
+                   'host_os_dict': hosd, 
+                   'lib_path': cus.get('path_lib', '')})
+    if r['return']>0: return r
+    s += r['script']
+
+
     return {'return':0, 'bat':s}

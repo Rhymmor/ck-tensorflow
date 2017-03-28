@@ -15,6 +15,7 @@ echo "Preparing vars for Tensorflow ..."
 
 export NDK_ROOT=${CK_ANDROID_NDK_ROOT_DIR}
 
+################################################################################################
 # TODO: remove to libjpeg package
 
 LIBJPEG_DIR=obj/local/${CK_ANDROID_ABI}/libjpeg.a
@@ -28,8 +29,10 @@ if [ ! -f "${CK_LIB_LIBJPEG_TENSORFLOW}/${LIBJPEG_DIR}" ]; then
     fi
 fi
 
+################################################################################################
+
 cd ${INSTALL_DIR}/src
-    MAKEFILE_DIR=tensorflow/contrib/makefile
+MAKEFILE_DIR=tensorflow/contrib/makefile
 
 if [ ! -d "${MAKEFILE_DIR}/downloads" ]; then
     ${MAKEFILE_DIR}/download_dependencies.sh
@@ -40,6 +43,8 @@ if [ ! -d "${MAKEFILE_DIR}/downloads" ]; then
     fi
 fi
 
+################################################################################################
+
 if [ ! -d "${MAKEFILE_DIR}/gen/protobuf" ]; then
     tensorflow/contrib/makefile/compile_android_protobuf.sh -c -a ${CK_ANDROID_ABI}
     if [ "${?}" != "0" ] ; then
@@ -48,6 +53,8 @@ if [ ! -d "${MAKEFILE_DIR}/gen/protobuf" ]; then
         exit 1
     fi
 fi
+
+################################################################################################
 
 if [[ "${CK_ANDROID_ABI}" == "arm64-v8a" ]]; then
     TOOLCHAIN=aarch64-linux-android-4.9

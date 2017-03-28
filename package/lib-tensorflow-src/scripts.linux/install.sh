@@ -10,16 +10,32 @@
 # PACKAGE_DIR
 # INSTALL_DIR
 
-cd ${INSTALL_DIR}/src && ./configure
+echo "**************************************************************"
+echo "Preparing vars for Tensorflow ..."
 
-if [ "${?}" != "0" ] ; then
-  echo "Error: Configure failed!"
-  exit 1
+cd ${INSTALL_DIR}/src
+MAKEFILE_DIR=tensorflow/contrib/makefile
+
+################################################################################################
+
+if [ ! -d "${MAKEFILE_DIR}/downloads" ]; then
+    ${MAKEFILE_DIR}/download_dependencies.sh
+    if [ "${?}" != "0" ]; then
+        echo ""
+        echo "Error: Downloading dependencies for '${CK_ENV_LIB_TF}/src/${MAKEFILE_DIR}' failed!"
+        exit 1
+    fi
 fi
 
-cd ${INSTALL_DIR}/src && bazel build tensorflow/examples/label_image
+################################################################################################
 
-if [ "${?}" != "0" ] ; then
-  echo "Error: bazel build failed!"
-  exit 1
+if [ ! -d "${MAKEFILE_DIR}/gen/protobuf" ]; then
+    tensorflow/contrib/makefile/compile_linux_protobuf.sh -c
+    if [ "${?}" != "0" ] ; then
+        echo ""
+        echo "Error: Compiling linux protobuf for '${CK_ENV_LIB_TF}/src/${MAKEFILE_DIR}' failed!"
+        exit 1
+    fi
 fi
+
+make -f ${MAKEFILE_DIR}/Makefile

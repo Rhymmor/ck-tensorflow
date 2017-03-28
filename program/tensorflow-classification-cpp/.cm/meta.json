@@ -1,33 +1,50 @@
 {
   "backup_data_uid": "a8addbb39edc4398", 
   "build_compiler_vars": {
+    "TARGET_SRC": "classification"
   }, 
-  "compile_cmds": {
-    "default": {
-      "cmd": "sh ../ck-compile$#script_ext#$"
-    }
-  }, 
+  "compile_cmds": { 
+    "default": { 
+      "cmd": "sh ../ck-compile$#script_ext#$" 
+    } 
+  },  
   "compile_deps": {
-    "lib_tensorflow_cpu": {
+    "compiler": {
+      "local": "yes",
+      "name": "C++ compiler",
+      "sort": 0,
+      "tags": "compiler,lang-cpp"
+    },
+    "lib_tensorflow_src": {
       "local": "yes", 
       "name": "Tensorflow CPU library", 
-      "sort": 0, 
-      "tags": "lib, tensorflow, tensorflow-cpu"
+      "sort": 100, 
+      "tags": "lib, tensorflow-src"
     },
     "libjpeg": {
       "local": "yes",
       "name": "libjpeg",
-      "sort": 1,
+      "sort": 200,
       "tags": "lib,libjpeg,jpeg"
     },
     "xopenme": {
       "local": "yes",
       "name": "xOpenME library",
-      "sort": 100,
+      "sort": 300,
       "tags": "lib,xopenme"
     }
   }, 
+  "compiler_add_include_as_env_from_deps": [
+    "CK_ENV_LIB_TF_MAKEFILE_DIR_DOWNLOADS",
+    "CK_ENV_LIB_TF_MAKEFILE_DIR_DOWNLOADS_EIGEN",
+    "CK_ENV_LIB_TF_MAKEFILE_DIR_DOWNLOADS_GEMMLOWP",
+    "CK_ENV_LIB_TF_MAKEFILE_DIR_GEN_PROTO",
+    "CK_ENV_LIB_TF_MAKEFILE_DIR_GEN_PROTOTEXT",
+    "CK_ENV_LIB_TF_MAKEFILE_DIR_GEN_PROTOBUF_HOST_INCUDE",
+    "/usr/local/include"
+  ],
   "compiler_env": "CK_CXX", 
+  "compiler_flags_as_env": "$<<CK_OPT_UNWIND>>$ $<<CK_ENV_LIB_CAFFE_CXXFLAGS>>$ $<<CK_COMPILER_FLAG_CPP11>>$",
   "data_name": "tensorflow-classification-cpp", 
   "main_language": "cpp", 
   "only_for_target_os_tags": [
@@ -87,6 +104,5 @@
     "demo", 
     "vcpu"
   ],
-  "target_file": "classification", 
-  "use_compile_script": "yes"
+  "target_file": "classification"
 }
